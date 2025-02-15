@@ -3,7 +3,7 @@ from flask_jwt_extended import jwt_required, get_jwt_identity
 from sqlalchemy import create_engine, text
 from sqlalchemy.orm import sessionmaker
 from models import db  # Adjust if your db instance is elsewhere
-from models import User  # Assuming your User model is in app.models
+from models import User ,PreprocessedKeystrokeData  # Assuming your User model is in app.models
 import os
 from utils.evaluate_metrics import evaluate_model_for_all_users,plot_metrics
 
@@ -71,3 +71,27 @@ def evaluate_metrics():
         return jsonify({"evaluation_metrics": metrics}), 200
     except Exception as e:
         return jsonify({"error": f"An error occurred: {e}"}), 500
+@admin_bp.route('/admin/user_data_count', methods=['GET'])
+def get_user_data_count():
+    user_id = request.args.get('user_id')
+
+    if not user_id:
+        return jsonify({'message': 'User ID or username is required'}), 400
+
+    try:
+        # Check if user_id is numeric
+        if user_id.isnumeric():
+            user = User.query.filter_by(id=int(user_id)).first()
+        else:
+            user = User.query.filter_by(username=user_id).first()
+
+        if not user:
+            return jsonify({'message': 'User not found'}), 404
+
+        # Count the number of rows in preprocessed_keystroke_data for the user
+        data_count = PreprocessedKeystrokeData.query.filter_by(user_id=user.id).count()
+
+        return jsonify({'data_count': data_count}), 200
+
+    except Exception as e:
+        return jsonify({'message': f'An error occurred: {str(e)}'}), 500

@@ -1,0 +1,47 @@
+{
+    "Neural Network": {
+        "params": {
+            "activation": "tanh",
+            "alpha": 0.0057547661357822966,
+            "hidden_layer_sizes": 100,
+            "learning_rate": "adaptive",
+            "solver": "adam"
+        },
+        "score": 0.9067348678601876
+    },
+    "Logistic Regression": {
+        "params": {
+            "C": 27.899987814184833,
+            "penalty": "l1",
+            "solver": "saga"
+        },
+        "score": 0.9154305200341006
+    },
+    "Random Forest": {
+        "params": {
+            "max_depth": 22,
+            "min_samples_leaf": 1,
+            "min_samples_split": 2,
+            "n_estimators": 142
+        },
+        "score": 0.8453537936913895
+    },
+    "Support Vector Machine": {
+        "params": {
+            "C": 41.125321884408,
+            "gamma": "auto",
+            "kernel": "linear"
+        },
+        "score": 0.9037936913895994
+    },
+    "Gradient Boosting": {
+        "params": {
+            "learning_rate": 0.19892482611811876,
+            "max_depth": 3,
+            "min_samples_leaf": 3,
+            "min_samples_split": 3,
+            "n_estimators": 195
+        },
+        "score": 0.8334612105711849
+    }
+}

@@ -1,4 +1,6 @@
 def calculate_keystroke_features(key_press_times, key_release_times):
+    print(f"Key Press Times: {key_press_times}")
+    print(f"Key Release Times: {key_release_times}")
     """
     This function calculates key intervals, durations, hold times, total typing time, 
     and typing speed for keystroke dynamics based on key press and release timestamps.

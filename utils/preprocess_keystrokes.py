@@ -102,26 +102,18 @@ def preprocess_keystroke_data():
 
 
 def process_single_keystroke_data(user_id, press_press_intervals, release_press_intervals, hold_times, total_typing_time, typing_speed_cps, backspace_count, error_rate):
-    
-    
-
     try:
         # Calculate means and variances from the provided intervals and durations
-        press_press_interval_mean = np.mean(
-            press_press_intervals) if press_press_intervals else 0
-
-        release_interval_mean = np.mean(
-            release_press_intervals) if release_press_intervals else 0
-        hold_time_mean = np.mean(hold_times) if hold_times else 0
+        press_press_interval_mean = round(np.mean(press_press_intervals), 5) if press_press_intervals else 0.0
+        release_interval_mean = round(np.mean(release_press_intervals), 5) if release_press_intervals else 0.0
+        hold_time_mean = round(np.mean(hold_times), 5) if hold_times else 0.0
 
         # Variances
-        press_press_interval_variance = np.var(
-            press_press_intervals) if press_press_intervals else 0
-        release_interval_variance = np.var(
-            release_press_intervals) if release_press_intervals else 0
-        hold_time_variance = np.var(hold_times) if hold_times else 0
+        press_press_interval_variance = round(np.var(press_press_intervals), 5) if press_press_intervals else 0.0
+        release_interval_variance = round(np.var(release_press_intervals), 5) if release_press_intervals else 0.0
+        hold_time_variance = round(np.var(hold_times), 5) if hold_times else 0.0
 
-        # Create a dictionary to hold the processed metrics
+        # Create a dictionary to hold the processed metrics, rounded to 5 decimals
         processed_data = {
             'user_id': user_id,
             'press_press_interval_mean': press_press_interval_mean,
@@ -131,9 +123,9 @@ def process_single_keystroke_data(user_id, press_press_intervals, release_press_
             'release_interval_variance': release_interval_variance,
             'hold_time_variance': hold_time_variance,
             'backspace_count': backspace_count,
-            'error_rate': error_rate,
-            'total_typing_time': total_typing_time,
-            'typing_speed_cps': typing_speed_cps
+            'error_rate': round(error_rate, 5) if error_rate else 0.0,
+            'total_typing_time': round(total_typing_time, 5) if total_typing_time else 0.0,
+            'typing_speed_cps': round(typing_speed_cps, 5) if typing_speed_cps else 0.0
         }
 
         return processed_data
